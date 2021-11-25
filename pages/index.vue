@@ -7,7 +7,11 @@
 </template>
 
 <script>
-import inputForm from '~/components/inputForm.vue'
+import inputForm from "~/components/inputForm.vue";
 export default {
-  components: { inputForm },}
+  components: { inputForm },
+  mounted() {
+    this.$store.dispatch("auth/getJWT");
+  },
+};
 </script>

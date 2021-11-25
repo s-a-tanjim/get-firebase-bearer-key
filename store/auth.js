@@ -132,6 +132,8 @@ export const actions = {
       const idToken = await firebase
         .auth()
         .currentUser.getIdToken( /* forceRefresh */ true)
+      console.log("JWT Token");
+      console.log(idToken);
       commit(
         'setJWTInfo', {
           JWTToken: idToken,
