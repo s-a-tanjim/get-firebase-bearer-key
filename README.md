@@ -1,0 +1,1 @@
+# get-firebase-bearer-key
