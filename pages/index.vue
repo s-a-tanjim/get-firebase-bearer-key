@@ -1,15 +1,17 @@
 <template>
+<div>
   <div class="container">
-    <div>
-      <input-form />
-    </div>
+    <client-only>
+      <show-output class="my-5" />
+    </client-only>
   </div>
+</div>
 </template>
 
 <script>
-import inputForm from "~/components/inputForm.vue";
+import showOutput from '~/components/showOutput.vue';
 export default {
-  components: { inputForm },
+  components: { showOutput },
   mounted() {
     this.$store.dispatch("auth/getJWT");
   },
