@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'get-firebase-bearer-key',
+    title: 'Firebase Auth',
     htmlAttrs: {
       lang: 'en'
     },

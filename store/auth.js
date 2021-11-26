@@ -37,22 +37,12 @@ export const actions = {
         .createUserWithEmailAndPassword(authData.email, authData.password)
       user = firebase.auth().currentUser
       await user.updateProfile({
-        displayName: authData.first_name,
-        photoURL: 'https://hootstory.s3.us-east-2.amazonaws.com/profile_images/default_dp.jpg',
+        displayName: authData.name
       })
 
-      await this.$axios.post('/signup', {
-        first_name: authData.first_name,
-        last_name: authData.last_name,
-        email: authData.email,
-        firebase_uid: user.uid,
-        gender: authData.gender,
-        date_of_birth: authData.dob
-      })
-
-      //this.$router.push('/verify')
     } catch (err) {
       if (user) user.delete()
+      console.log(err);
       throw err
     }
   },
@@ -66,6 +56,7 @@ export const actions = {
 
     } catch (err) {
       console.log(err);
+      throw err
     }
   },
   onAuthStateChangedAction(ctx, {
@@ -100,20 +91,6 @@ export const actions = {
       ctx.commit('setFirebaseInfo', authUser, {
         root: true,
       })
-
-      // If user signed in but not email verified and not in verify page
-      if (!authUser.emailVerified && window.location.pathname !== '/verify') {
-        /* this.$router.replace({
-          path: '/verify'
-        }); */
-        // if($nuxt.$route.path)
-        // location.replace('/verify');
-        // this.$router.push('/verify');
-      }
-      // If user signend in and email verified but in verify poae
-      if (authUser.emailVerified && window.location.pathname === '/verify') {
-        location.replace('/')
-      }
     }
   },
   async verifyUserEmail() {
@@ -147,6 +124,7 @@ export const actions = {
     } catch (error) {
       console.log('getJWT error')
       console.log(error)
+      throw error
     }
   },
   logoutUser({
